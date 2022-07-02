@@ -1,15 +1,16 @@
 :root {
-  --primary-text-color: #757575;
   /*основний колір*/
+  --primary-text-color: #757575;
+  /*колір hover, focus, overlay*/
   --accent-color: #2196F3;
-  /*колір hover, focus, button*/
-  --title-text-color: #212121;
   /*колір заголовків*/
+  --title-text-color: #212121;
   --white-color: #FFFFFF;
   --baner-color: #2F303A;
   --button-color: #F5F4FA;
   --icon-color:#AFB1B8;
   --bg-color-icon:#FFFFFF1A;
+  --border-color:#EEEEEE;
 }
 
 body {
@@ -101,11 +102,14 @@ ul {
 }
 
 .site-nav .link {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
-
+    
   color: var(--title-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   font-weight: 500;
   font-size: 14px;
@@ -130,6 +134,21 @@ ul {
   margin-right: 50px;
 }
 
+.site-nav .link.current::after {
+  content: '';
+  position: absolute;
+  display: block;
+  left: 0;
+  bottom: 0;
+    
+  width: 100%;
+  height: 4px;
+
+  background-color: var(--accent-color);
+
+  border-radius: 2px;
+}
+
 .auth-nav {
   display: flex;
   margin-left: auto;
@@ -143,13 +162,15 @@ ul {
   padding-bottom: 32px;
   
   color: inherit;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
-}
+  }
 
 .icon-header {
   display: inline-block;
@@ -192,6 +213,8 @@ ul {
 }
 
 .footer-link .contact {
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   color: var(--primary-text-color);
 
   font-weight: 500;
@@ -252,6 +275,8 @@ ul {
   height: 44px;
 
   background-color: var(--bg-color-icon);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-socials-link:hover {
@@ -400,14 +425,34 @@ ul {
 
 .work-list {
   display: flex;
+  gap: 30px;
 }
 
 .work-item {
   width: 370px;
+  height: 294px;
 }
 
-.work-item:not(:last-child) {
-  margin-right: 30px;
+.work-box {
+  position: relative;
+}
+
+.work-label {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 27px 82px;
+
+  color: var(--white-color);
+  background-color: #2F303ACC;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 /*Team*/
@@ -489,6 +534,8 @@ ul {
     
   width: 44px;
   height: 44px;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .socials-icon {
@@ -497,7 +544,6 @@ ul {
 
 .team-socials-link:hover .socials-icon {
   fill: var(--white-color);
-
 }
 
 .team-socials-link:focus .socials-icon {
@@ -542,6 +588,8 @@ ul {
  
   border: 1px solid var(--icon-color);
   border-radius: 4px;  
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   
   text-decoration: none;
 }
@@ -588,6 +636,8 @@ ul {
   background-color: var(--button-color);
   color: var(--title-text-color);
 
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
@@ -622,6 +672,8 @@ ul {
 .portfolio-link {
   display: block;
   text-decoration: none;  
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-link:hover {
@@ -634,6 +686,33 @@ ul {
 
 .portfolio-img {
   display: block;  
+}
+
+.portfolio-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  padding: 63px 24px;
+
+  color: var(--white-color);
+  background-color:#2196F3E5;
+  
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;    
+  letter-spacing: 0.03em;
+}
+
+.portfolio-link:hover .portfolio-overlay {
+  transform: translateY(0%);
 }
 
 .portfolio-wrap {
@@ -660,6 +739,76 @@ ul {
   line-height: 1.88;
   letter-spacing: 0.03em;
 }
+
+/* Modal */
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+   
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;  
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 528px;
+  min-height: 521px;
+  
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms cubic-bezier(0.4, 0, 0.2, 1) ;
+
+  border-radius: 4px;
+
+  background-color:var(--white-color) ;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--white-color);
+  background-size: contain;
+  
+  border: 1px solid #0000001A;
+  border-radius: 50%;
+
+  cursor: pointer;  
+}
+
+
+
+
+
+
 
 
 
