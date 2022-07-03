@@ -430,11 +430,14 @@ ul {
 
 .work-item {
   width: 370px;
-  height: 294px;
 }
 
 .work-box {
   position: relative;
+}
+
+.work-img {
+  vertical-align: top;
 }
 
 .work-label {
