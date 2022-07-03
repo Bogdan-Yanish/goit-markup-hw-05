@@ -160,6 +160,7 @@ ul {
   display: inline-flex;
   padding-top: 32px;
   padding-bottom: 32px;
+  align-items: center;
   
   color: inherit;
 
@@ -445,7 +446,7 @@ ul {
   right: 0;
   left: 0;
   bottom: 0;
-  padding: 27px 82px;
+  padding: 27px 0;
 
   color: var(--white-color);
   background-color: #2F303ACC;
@@ -538,11 +539,12 @@ ul {
   width: 44px;
   height: 44px;
 
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 .socials-icon {
   fill:var(--icon-color);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .team-socials-link:hover .socials-icon {
